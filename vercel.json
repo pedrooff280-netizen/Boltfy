@@ -1,0 +1,4 @@
+{
+    "buildCommand": "cd Boltfy && npm install && npm run build",
+    "outputDirectory": "Boltfy/dist"
+}
