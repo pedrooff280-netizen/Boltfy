@@ -15,7 +15,8 @@ import {
   ExternalLink,
   ArrowRight,
   Clock,
-  Navigation
+  Navigation,
+  Cpu
 } from 'lucide-react';
 
 declare global {
@@ -73,14 +74,11 @@ const ProspectorView: React.FC = () => {
     });
   };
 
-  const handleSearch = async () => {
-    if (!niche || !location) {
-      alert("Por favor, preencha o Nicho e a Localização para iniciar a prospecção.");
-      return;
-    }
+  const handleSearch = async (simulated: boolean = false) => {
+    console.log(`>>> [DIAGNÓSTICO] Iniciando busca (Simulado: ${simulated})...`);
 
-    if (!window.google || !window.google.maps || !window.google.maps.places) {
-      alert("A API do Google Maps ainda não foi carregada. Por favor, aguarde ou recarregue a página.");
+    if (!niche || !location) {
+      alert("Certifique-se de preencher Nicho e Localização.");
       return;
     }
 
@@ -89,97 +87,136 @@ const ProspectorView: React.FC = () => {
     setHasSearched(true);
     setSelectedLead(null);
 
+    // MODO SIMULADO
+    if (simulated) {
+      setTimeout(() => {
+        const mockLeads: Lead[] = [
+          {
+            id: `mock-1-${niche}`,
+            name: `${niche} Premium - ${location}`,
+            address: `Rua Augusta, 1234, ${location}`,
+            phone: '(11) 98888-7777',
+            website: 'https://exemplo.com/premium',
+            rating: 4.9,
+            user_ratings_total: 856,
+            maps_url: 'https://maps.google.com',
+            isOpen: true,
+            location: { lat: -23.5594, lng: -46.6583 }
+          },
+          {
+            id: `mock-2-${niche}`,
+            name: `${niche} Central`,
+            address: `Av. Paulista, 500, ${location}`,
+            phone: '(11) 97777-6666',
+            website: 'Sem Site',
+            rating: 4.2,
+            user_ratings_total: 120,
+            maps_url: 'https://maps.google.com',
+            isOpen: false,
+            location: { lat: -23.5615, lng: -46.6559 }
+          },
+          {
+            id: `mock-3-${niche}`,
+            name: `Elite ${niche} & Co`,
+            address: `Alameda Santos, 1000, ${location}`,
+            phone: '(11) 96666-5555',
+            website: 'https://exemplo.com/elite',
+            rating: 3.9,
+            user_ratings_total: 45,
+            maps_url: 'https://maps.google.com',
+            isOpen: true,
+            location: { lat: -23.5641, lng: -46.6521 }
+          }
+        ];
+        setLeads(mockLeads);
+        setSelectedLead(mockLeads[0]);
+        setIsSearching(false);
+      }, 1000);
+      return;
+    }
+
+    const safetyTimeout = setTimeout(() => {
+      if (isSearching) {
+        setIsSearching(false);
+        alert("O Google não respondeu (Timeout). Verifique se o seu projeto tem um Cartão de Crédito válido no Faturamento do Google Cloud!");
+      }
+    }, 25000);
+
     try {
-      const service = new window.google.maps.places.PlacesService(document.createElement('div'));
+      console.log(">>> [STP 1] Carregando Biblioteca Places v3...");
+      const { Place, SearchByTextRankPreference } = await window.google.maps.importLibrary("places") as any;
+      console.log(">>> [STP 2] Biblioteca carregada.");
 
       const request = {
-        query: `${niche} em ${location}`,
-        language: 'pt-BR'
+        textQuery: `${niche} em ${location}`,
+        fields: ['id', 'displayName', 'formattedAddress', 'rating', 'userRatingCount', 'websiteUri', 'nationalPhoneNumber', 'googleMapsUri', 'location'],
+        maxResultCount: 15,
+        languageCode: 'pt-BR',
+        rankPreference: SearchByTextRankPreference.RELEVANCE
       };
 
-      service.textSearch(request, (results: any[], status: string) => {
-        if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
-          const processedLeads: Lead[] = [];
+      try {
+        console.log(">>> [STP 3] Disparando searchByText...");
+        const { places } = await Place.searchByText(request);
+        console.log(">>> [STP 4] Resultados:", places?.length || 0);
 
-          const detailPromises = results.map(place => {
-            return new Promise<void>((resolve) => {
-              if (!place.place_id) {
-                resolve();
-                return;
-              }
-
-              service.getDetails({
-                placeId: place.place_id,
-                fields: ['place_id', 'name', 'formatted_address', 'formatted_phone_number', 'website', 'rating', 'user_ratings_total', 'url', 'opening_hours', 'geometry']
-              }, (details: any, detailStatus: string) => {
-                if (detailStatus === window.google.maps.places.PlacesServiceStatus.OK && details) {
-                  const rating = details.rating || 0;
-                  const reviews = details.user_ratings_total || 0;
-                  const hasWebsite = !!details.website;
-
-                  // Filter by Stars
-                  if (rating < stars) {
-                    resolve();
-                    return;
-                  }
-
-                  // Filter by Max Reviews
-                  if (maxReviews !== 'Qualquer') {
-                    const max = parseInt(maxReviews.replace('Até ', ''));
-                    if (reviews > max) {
-                      resolve();
-                      return;
-                    }
-                  }
-
-                  // Filter by Search Mode (No Site)
-                  if (searchMode === 'no-site' && hasWebsite) {
-                    resolve();
-                    return;
-                  }
-
-                  processedLeads.push({
-                    id: details.place_id,
-                    name: details.name || '',
-                    address: details.formatted_address || '',
-                    phone: details.formatted_phone_number || 'Sem Telefone',
-                    website: details.website || 'Sem Site',
-                    rating: rating || 'N/A',
-                    user_ratings_total: reviews,
-                    maps_url: details.url,
-                    isOpen: details.opening_hours ? details.opening_hours.isOpen() : null,
-                    location: {
-                      lat: details.geometry.location.lat(),
-                      lng: details.geometry.location.lng()
-                    }
-                  });
-                }
-                resolve();
-              });
-            });
-          });
-
-          Promise.all(detailPromises).then(() => {
-            setLeads(processedLeads);
-            if (processedLeads.length > 0) {
-              setSelectedLead(processedLeads[0]);
-            }
-            setIsSearching(false);
-          });
-        } else {
-          console.error("Erro na busca do Google Places:", status);
+        if (!places || places.length === 0) {
+          clearTimeout(safetyTimeout);
           setIsSearching(false);
-          if (status === window.google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
-            alert("Nenhum resultado encontrado para essa busca. Tente mudar os termos.");
-          } else {
-            alert(`Erro na API: ${status}. Verifique sua chave de API ou cota.`);
-          }
+          alert("Nenhum resultado real encontrado para essa busca.");
+          return;
         }
-      });
-    } catch (error) {
-      console.error("Erro na prospecção:", error);
-      alert("Houve um erro ao buscar os leads.");
+
+        const processedLeads: Lead[] = places.map((place: any) => ({
+          id: place.id,
+          name: place.displayName?.text || place.displayName || '',
+          address: place.formattedAddress || '',
+          phone: place.nationalPhoneNumber || 'Sem Telefone',
+          website: place.websiteUri || 'Sem Site',
+          rating: place.rating || 'N/A',
+          user_ratings_total: place.userRatingCount || 0,
+          maps_url: place.googleMapsUri,
+          isOpen: null,
+          location: {
+            lat: place.location?.lat() || 0,
+            lng: place.location?.lng() || 0
+          }
+        }));
+
+        const filtered = processedLeads.filter(lead => {
+          const ratingNum = typeof lead.rating === 'number' ? lead.rating : 0;
+          const meetsRating = ratingNum >= stars;
+          let meetsMaxReviews = true;
+          if (maxReviews !== 'Qualquer') {
+            const max = parseInt(maxReviews.replace('Até ', ''));
+            meetsMaxReviews = (lead.user_ratings_total || 0) <= max;
+          }
+          const meetsSiteMode = searchMode === 'no-site' ? lead.website === 'Sem Site' : true;
+          return meetsRating && meetsMaxReviews && meetsSiteMode;
+        });
+
+        clearTimeout(safetyTimeout);
+        setLeads(filtered);
+        if (filtered.length > 0) {
+          setSelectedLead(filtered[0]);
+        } else {
+          alert("Empresas encontradas no Google, mas filtradas por estrelas/avaliações.");
+        }
+        setIsSearching(false);
+
+      } catch (searchError: any) {
+        clearTimeout(safetyTimeout);
+        setIsSearching(false);
+        console.error(">>> [ERRO V3]", searchError);
+
+        // Mensagem definitiva para o usuário
+        alert(`ALERTA GOOGLE: ${searchError.message || 'Ativação Pendente'}\n\nVocê precisa ativar especificamente a "PLACES API (NEW)" no seu projeto atual do Google Cloud.\n\nAtive aqui: https://console.cloud.google.com/google/maps-apis/library/places.googleapis.com`);
+      }
+    } catch (error: any) {
+      clearTimeout(safetyTimeout);
       setIsSearching(false);
+      console.error(">>> [EXCEÇÃO CRÍTICA]", error);
+      alert("Erro ao carregar o SDK do Google: " + error.message);
     }
   };
 
@@ -218,14 +255,27 @@ const ProspectorView: React.FC = () => {
               <Globe className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
             </div>
 
-            <button
-              disabled={isSearching}
-              onClick={handleSearch}
-              className={`bg-wine-600 hover:bg-wine-500 text-white px-8 py-3 rounded-2xl font-bold text-sm transition-all flex items-center gap-2 shadow-[0_0_30px_rgba(225,29,72,0.3)] ${isSearching ? 'opacity-50 cursor-not-allowed' : ''}`}
-            >
-              {isSearching ? <Loader2 className="w-4 h-4 animate-spin" /> : <Zap className="w-4 h-4 fill-current" />}
-              {isSearching ? 'Buscando...' : 'Prospectar'}
-            </button>
+            <div className="flex gap-2">
+              <button
+                disabled={isSearching}
+                onClick={() => handleSearch(false)}
+                className={`bg-wine-600 hover:bg-wine-500 text-white px-8 py-3 rounded-2xl font-bold text-sm transition-all flex items-center gap-2 shadow-[0_0_30px_rgba(225,29,72,0.3)] ${isSearching ? 'opacity-50 cursor-not-allowed' : ''}`}
+                title="Buscar dados REAIS do Google (Requer API ativada)"
+              >
+                {isSearching ? <Loader2 className="w-4 h-4 animate-spin" /> : <Zap className="w-4 h-4 fill-current" />}
+                {isSearching ? 'Buscando...' : 'Prospectar'}
+              </button>
+
+              <button
+                disabled={isSearching}
+                onClick={() => handleSearch(true)}
+                className="bg-slate-800 hover:bg-slate-700 text-slate-300 px-6 py-3 rounded-2xl font-medium text-sm transition-all flex items-center gap-2 border border-white/5"
+                title="Modo Simulação (Para testar o sistema agora)"
+              >
+                <Cpu className="w-4 h-4" />
+                <span>Simular</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -375,7 +425,10 @@ const ProspectorView: React.FC = () => {
                     style={{ border: 0 }}
                     loading="lazy"
                     allowFullScreen
-                    src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyC6H-UuaIw-pglDYo_3ZrgOXx9U2CcGQGk&q=place_id:${selectedLead.id}`}
+                    src={selectedLead.id.startsWith('mock-')
+                      ? `https://www.google.com/maps/embed/v1/place?key=AIzaSyC6H-UuaIw-pglDYo_3ZrgOXx9U2CcGQGk&q=${encodeURIComponent(selectedLead.name + ' ' + selectedLead.address)}`
+                      : `https://www.google.com/maps/embed/v1/place?key=AIzaSyC6H-UuaIw-pglDYo_3ZrgOXx9U2CcGQGk&q=place_id:${selectedLead.id}`
+                    }
                   />
                   <div className="absolute top-4 left-4">
                     <div className={`px-3 py-1 rounded-full text-[10px] font-black border ${selectedLead.isOpen ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500' : 'bg-rose-500/10 border-rose-500/20 text-rose-500'}`}>

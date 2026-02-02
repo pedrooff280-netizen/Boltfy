@@ -13,6 +13,7 @@ import SettingsView from './components/SettingsView';
 import HelpView from './components/HelpView';
 import StudyAreaView from './components/StudyAreaView';
 import UsersView from './components/UsersView';
+import RadarView from './components/RadarView';
 import { supabase } from './src/lib/supabase';
 
 const App: React.FC = () => {
@@ -21,8 +22,10 @@ const App: React.FC = () => {
   const [projectData, setProjectData] = useState<any>(null);
 
   useEffect(() => {
+    console.log("App: Checking initial session...");
     // Check initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log("App: Initial session found:", !!session);
       setIsAuthenticated(!!session);
     });
 
@@ -30,6 +33,7 @@ const App: React.FC = () => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
+      console.log("App: Auth state change:", !!session);
       setIsAuthenticated(!!session);
     });
 
@@ -95,6 +99,8 @@ const App: React.FC = () => {
         return <ProspectorView />;
       case 'iacopy':
         return <IACopyView />;
+      case 'radar':
+        return <RadarView />;
       case 'settings':
         return <SettingsView />;
       case 'ajuda':
@@ -142,7 +148,7 @@ const App: React.FC = () => {
       )}
 
       <main className={`flex-1 flex flex-col min-w-0 ${activeTab !== 'prompt-result' ? 'pt-20' : 'pt-0'}`}>
-        {(activeTab !== 'create-app' && activeTab !== 'prompt-result' && activeTab !== 'prospector' && activeTab !== 'iacopy' && activeTab !== 'estudos') && <Header />}
+        {(activeTab !== 'create-app' && activeTab !== 'prompt-result' && activeTab !== 'prospector' && activeTab !== 'iacopy' && activeTab !== 'estudos' && activeTab !== 'radar') && <Header />}
 
         <div className={`${activeTab !== 'prompt-result' ? 'px-4 md:px-8 pb-10' : ''}`}>
           {renderContent()}

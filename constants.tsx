@@ -9,7 +9,8 @@ import {
   GraduationCap,
   HelpCircle,
   Settings,
-  Binoculars
+  Binoculars,
+  Radar
 } from 'lucide-react';
 import { NavItem, ResourceCardProps } from './types';
 
@@ -18,7 +19,7 @@ export const NAV_ITEMS: NavItem[] = [
   { id: 'biblioteca', label: 'Biblioteca', icon: Library, section: 'principal' },
   { id: 'prospector', label: 'Prospector', icon: Users, section: 'vendas' },
   { id: 'iacopy', label: 'IA Copy', icon: Bot, section: 'vendas' },
-  { id: 'contratos', label: 'Contratos', icon: FileText, section: 'vendas' },
+  { id: 'radar', label: 'Radar', icon: Radar, section: 'vendas' },
   { id: 'estudos', label: 'Área de Estudos', icon: GraduationCap, section: 'suporte' },
   { id: 'users', label: 'Usuários', icon: Users, section: 'suporte' },
   { id: 'ajuda', label: 'Ajuda', icon: HelpCircle, section: 'suporte' },
