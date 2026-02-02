@@ -149,7 +149,7 @@ const RadarView: React.FC = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#0A0A0A] text-white font-sans selection:bg-red-600/40 p-1 md:p-4 flex flex-col items-center overflow-x-hidden">
+        <div className="min-h-screen text-white font-sans selection:bg-red-600/40 p-1 md:p-4 flex flex-col items-center overflow-x-hidden" style={{ background: 'radial-gradient(circle at 50% 0%, #150505 0%, #050505 100%)', backgroundAttachment: 'fixed' }}>
 
             {/* Load Fonts */}
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -160,6 +160,13 @@ const RadarView: React.FC = () => {
           .font-body { font-family: 'Inter', sans-serif; }
           .font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
           .font-poppins { font-family: 'Poppins', sans-serif; }
+
+          body {
+            background: radial-gradient(circle at 50% 0%, #150505 0%, #050505 100%) !important;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+          }
 
           @keyframes pulse-blue {
             0% { text-shadow: 0 0 0px rgba(59, 130, 246, 0); opacity: 0.8; }
