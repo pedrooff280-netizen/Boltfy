@@ -498,7 +498,7 @@ const RadarView: React.FC = () => {
                     {/* Hero Section Redesign */}
                     <div className="max-w-4xl text-center mb-8 mx-auto">
                         <h1 className="main-title-poppins text-zinc-400 text-xl md:text-2xl leading-relaxed font-light tracking-tight">
-                            Unidades ocultas e extraia oportunidades reais de negócio. <br />
+                            Extraia oportunidades reais de negócio. <br />
                             <span className="text-zinc-200 font-normal">Onde há conversa, há conversão.</span>
                         </h1>
                     </div>
