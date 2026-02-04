@@ -33,6 +33,126 @@ const BOLTFY_MODELS_DB: Record<string, any> = {
       text: '#FFFFFF',
       font: 'Roboto'
     }
+  },
+  'Personal Trainer': {
+    task: 'Digitalizar a ficha de treino do aluno e facilitar o controle de acesso e pagamentos, permitindo que o usuário acompanhe sua evolução de carga e medidas.',
+    pain: 'Perda de fichas de papel, falta de orientação na execução dos exercícios e inadimplência escolar.',
+    audience: 'Alunos de musculação que buscam autonomia e donos de academias que precisam profissionalizar o atendimento.',
+    dailyUsers: 'Pacientes; Recepcionistas; Médicos.',
+    pages: 'Login/Bioimpedância, Dashboard do Aluno, Grade de Treinos (A, B, C), Biblioteca de Exercícios em Vídeo, Calendário de Frequência, Loja de Suplementos, Área de Pagamento/Mensalidade.',
+    features: 'Cronômetro de descanso integrado, sistema de \'Check-in\' por QR Code, ranking de frequência dos alunos e notificações de renovação de plano.',
+    design: {
+      primary: '#8A4DFF',
+      secondary: '#64748B',
+      bg: '#FFFFFF',
+      text: '#0F172A',
+      font: 'Plus Jakarta Sans'
+    }
+  },
+  'Cafeteria': {
+    task: 'Permitir que o cliente visualize o cardápio completo, faça pedidos personalizados (tipo de leite, extras) e acumule pontos em um programa de fidelidade.',
+    pain: 'Filas longas, erros em pedidos anotados à mão e falta de um canal direto para promoções e fidelização.',
+    audience: 'Amantes de café que buscam conveniência e donos de cafeterias que querem digitalizar o atendimento.',
+    dailyUsers: 'Clientes; Baristas; Gerentes.',
+    pages: 'Cardápio Digital (Bebidas, Doces, Salgados), Página de Personalização do Pedido, Carrinho, Checkout (Retirada/Delivery), Meus Pedidos, Perfil com Programa de Fidelidade.',
+    features: 'Sistema de pontos por compra, cupons de desconto para aniversariantes, notificações de novas bebidas sazonais e integração com pagamento via Pix.',
+    design: {
+      primary: '#8A4DFF',
+      secondary: '#64748B',
+      bg: '#FFFFFF',
+      text: '#0F172A',
+      font: 'Plus Jakarta Sans'
+    }
+  },
+  'Loja de Roupas': {
+    task: 'Proporcionar uma experiência de compra visual e fluida, permitindo a seleção de variações (cor/tamanho) e finalização rápida com cálculo de frete.',
+    pain: 'Baixa conversão por falta de detalhes, abandono de carrinho e dificuldade em gerenciar grades de produtos complexas.',
+    audience: 'Consumidores de moda que buscam tendências e lojistas que precisam de uma vitrine profissional e automatizada.',
+    dailyUsers: 'Compradores online; Gestores de Estoque.',
+    pages: 'Vitrine de Lançamentos, Categorias (Masc/Fem/Acessórios), Página de Produto com Guia de Medidas, Provador Virtual Simples, Carrinho, Checkout, Área de Pedidos.',
+    features: 'Cálculo de frete (Correios/Melhor Envio), sistema de cupons de desconto, integração com Instagram Shopping e lista de desejos (Wishlist).',
+    design: {
+      primary: '#8A4DFF',
+      secondary: '#64748B',
+      bg: '#FFFFFF',
+      text: '#0F172A',
+      font: 'Plus Jakarta Sans'
+    }
+  },
+  'Hamburgueria Artesanal': {
+    task: 'Oferecer um cardápio digital para montagem de hambúrgueres personalizados (tipo de pão, blend, queijo, extras) com pedidos para delivery ou retirada.',
+    pain: 'Erros em pedidos complexos, demora no atendimento telefônico e falta de visibilidade dos ingredientes artesanais.',
+    audience: 'Amantes de hambúrgueres gourmet e donos de hamburguerias que querem profissionalizar o delivery.',
+    dailyUsers: 'Clientes; Cozinheiros; Entregadores.',
+    pages: 'Cardápio com Combos, Montagem do Hambúrguer, Acompanhamentos e Bebidas, Carrinho, Checkout (Delivery/Retirada), Meus Pedidos, Programa de Fidelidade.',
+    features: 'Sistema de avaliação de pedidos, rastreio de delivery em tempo real, promoções de combo e integração com iFood/Rappi.',
+    design: {
+      primary: '#D97706',
+      secondary: '#78350F',
+      bg: '#1C1917',
+      text: '#FAFAF9',
+      font: 'Plus Jakarta Sans'
+    }
+  },
+  'Sushi & Japonesa': {
+    task: 'Apresentar um cardápio visual de culinária japonesa com opções de rodízio, combos e pratos à la carte, facilitando pedidos online.',
+    pain: 'Dificuldade em mostrar a variedade de peixes e combinações, pedidos confusos por telefone e falta de controle de reservas.',
+    audience: 'Apreciadores de culinária japonesa e donos de restaurantes que buscam digitalizar o atendimento.',
+    dailyUsers: 'Clientes; Sushiman; Gerentes.',
+    pages: 'Cardápio (Sashimis, Temakis, Hot Rolls, Pratos Quentes), Combos, Carrinho, Checkout, Reserva de Mesa, Meus Pedidos.',
+    features: 'Sistema de reserva de mesa online, opção de rodízio com tempo controlado, fotos de alta qualidade dos pratos e sugestões de harmonização com bebidas.',
+    design: {
+      primary: '#DC2626',
+      secondary: '#1E3A5F',
+      bg: '#0F172A',
+      text: '#F8FAFC',
+      font: 'Plus Jakarta Sans'
+    }
+  },
+  'Açaiteria & Sorveteria': {
+    task: 'Permitir a montagem personalizada de açaís e sorvetes (tamanho, frutas, caldas, granola) com visualização do preço em tempo real.',
+    pain: 'Filas no balcão, dificuldade em precificar combinações personalizadas e falta de um programa de fidelidade digital.',
+    audience: 'Jovens e famílias que buscam opções refrescantes e donos de açaiterias que querem agilizar o atendimento.',
+    dailyUsers: 'Clientes; Atendentes; Proprietários.',
+    pages: 'Monte seu Açaí/Sorvete, Tamanhos e Bases, Adicionais (Frutas, Caldas, Granola), Carrinho, Checkout, Meus Pedidos, Fidelidade.',
+    features: 'Calculadora de preço dinâmica por adicional, programa de pontos, cupons de desconto e integração com delivery.',
+    design: {
+      primary: '#7C3AED',
+      secondary: '#DB2777',
+      bg: '#FAFAFA',
+      text: '#18181B',
+      font: 'Plus Jakarta Sans'
+    }
+  },
+  'Confeitaria & Doces': {
+    task: 'Exibir um catálogo de bolos, doces e sobremesas com opção de encomenda personalizada (sabor, tamanho, decoração) e agendamento de entrega.',
+    pain: 'Dificuldade em gerenciar encomendas por WhatsApp, falta de portfólio visual e erros na comunicação de detalhes personalizados.',
+    audience: 'Clientes que buscam doces para eventos e confeiteiros que precisam organizar sua produção.',
+    dailyUsers: 'Clientes; Confeiteiros; Ajudantes.',
+    pages: 'Catálogo (Bolos, Doces Finos, Tortas, Cupcakes), Página de Encomenda Personalizada, Carrinho, Checkout com Agendamento, Meus Pedidos, Galeria de Trabalhos.',
+    features: 'Calendário de disponibilidade, upload de referência de decoração, sinal de pagamento antecipado e notificações de status da encomenda.',
+    design: {
+      primary: '#EC4899',
+      secondary: '#A855F7',
+      bg: '#FFF1F2',
+      text: '#1F2937',
+      font: 'Playfair Display'
+    }
+  },
+  'Distribuidora de Bebidas': {
+    task: 'Oferecer um catálogo completo de bebidas (cervejas, destilados, refrigerantes, água) com preços por atacado e varejo, e entrega rápida.',
+    pain: 'Pedidos por telefone demorados, falta de controle de estoque visível para o cliente e dificuldade em gerenciar rotas de entrega.',
+    audience: 'Bares, restaurantes e consumidores finais que buscam conveniência e preço.',
+    dailyUsers: 'Clientes B2B; Clientes B2C; Motoristas.',
+    pages: 'Catálogo por Categoria (Cervejas, Destilados, Sem Álcool), Ofertas do Dia, Carrinho, Checkout (Atacado/Varejo), Meus Pedidos, Rastreio de Entrega.',
+    features: 'Preços diferenciados por quantidade, rastreio de entrega em tempo real, programa de recompensas para clientes frequentes e integração com estoque.',
+    design: {
+      primary: '#2563EB',
+      secondary: '#F59E0B',
+      bg: '#111827',
+      text: '#F9FAFB',
+      font: 'Plus Jakarta Sans'
+    }
   }
 };
 
@@ -47,153 +167,108 @@ const PromptResultView: React.FC<PromptResultViewProps> = ({ data, onReset, onGo
 
     const {
       projectName, appDescription, primaryLanguage, selectedDevPlatform,
-      primaryColor, secondaryColor, bgColor, textColor, selectedFont,
-      category, appAudienceDetail
+      primaryColor, secondaryColor, bgColor, textColor,
+      appAudienceDetail
     } = data;
 
     // Detectar se é um modelo pré-definido
     const isPizzaria = projectName?.toLowerCase().includes('pizzaria') || appDescription?.toLowerCase().includes('pizzaria');
-    const modelData = isPizzaria ? BOLTFY_MODELS_DB['Pizzaria Delivery'] : null;
+    const isGym = projectName?.toLowerCase().includes('personal') || appDescription?.toLowerCase().includes('personal') || projectName?.toLowerCase().includes('academia');
+    const isCafeteria = projectName?.toLowerCase().includes('cafeteria') || appDescription?.toLowerCase().includes('cafeteria') || projectName?.toLowerCase().includes('café');
+    const isLojaRoupas = projectName?.toLowerCase().includes('loja de roupas') || appDescription?.toLowerCase().includes('roupas') || projectName?.toLowerCase().includes('moda');
+    const isHamburgueria = projectName?.toLowerCase().includes('hamburgueria') || appDescription?.toLowerCase().includes('hambúrguer') || appDescription?.toLowerCase().includes('burger');
+    const isSushi = projectName?.toLowerCase().includes('sushi') || appDescription?.toLowerCase().includes('japonesa') || appDescription?.toLowerCase().includes('sashimi');
+    const isAcai = projectName?.toLowerCase().includes('açaí') || projectName?.toLowerCase().includes('acai') || appDescription?.toLowerCase().includes('sorveteria');
+    const isConfeitaria = projectName?.toLowerCase().includes('confeitaria') || appDescription?.toLowerCase().includes('doces') || appDescription?.toLowerCase().includes('bolo');
+    const isDistribuidora = projectName?.toLowerCase().includes('distribuidora') || appDescription?.toLowerCase().includes('bebidas') || appDescription?.toLowerCase().includes('cerveja');
+
+    let modelData = null;
+    if (isPizzaria) modelData = BOLTFY_MODELS_DB['Pizzaria Delivery'];
+    else if (isGym) modelData = BOLTFY_MODELS_DB['Personal Trainer'];
+    else if (isCafeteria) modelData = BOLTFY_MODELS_DB['Cafeteria'];
+    else if (isLojaRoupas) modelData = BOLTFY_MODELS_DB['Loja de Roupas'];
+    else if (isHamburgueria) modelData = BOLTFY_MODELS_DB['Hamburgueria Artesanal'];
+    else if (isSushi) modelData = BOLTFY_MODELS_DB['Sushi & Japonesa'];
+    else if (isAcai) modelData = BOLTFY_MODELS_DB['Açaiteria & Sorveteria'];
+    else if (isConfeitaria) modelData = BOLTFY_MODELS_DB['Confeitaria & Doces'];
+    else if (isDistribuidora) modelData = BOLTFY_MODELS_DB['Distribuidora de Bebidas'];
 
     // Variáveis Finais (Prioriza Modelo -> Se não, usa Formulário)
-    const finalTask = modelData?.task || appDescription || 'Create a high-fidelity application.';
-    const finalPain = modelData?.pain || data.appPain || 'Optimize business processes.';
+    const finalTask = modelData?.task || appDescription || 'Oferecer uma experiência fluida e intuitiva para o usuário final.';
+    const finalPain = modelData?.pain || data.appPain || 'Eliminar processos manuais e automatizar a rotina do usuário.';
     const finalAudience = modelData?.audience ||
-      (data.selectedAudienceType && appAudienceDetail ? `${data.selectedAudienceType} (${appAudienceDetail})` : data.selectedAudienceType || 'General Public');
-    const finalPages = modelData?.pages || (data.selectedPages?.length > 0 ? data.selectedPages.join(', ') : 'Landing Page, Dashboard, Settings');
+      (data.selectedAudienceType && appAudienceDetail ? `${data.selectedAudienceType} (${appAudienceDetail})` : data.selectedAudienceType || 'Público Geral');
+    const finalPages = modelData?.pages || (data.selectedPages?.length > 0 ? data.selectedPages.join(', ') : 'Landing Page, Dashboard, Perfil, Configurações');
     const fPrimary = modelData?.design.primary || primaryColor;
     const fSecondary = modelData?.design.secondary || secondaryColor;
     const fBg = modelData?.design.bg || bgColor;
     const fText = modelData?.design.text || textColor;
-    const fFont = modelData?.design.font || (selectedFont === 'Outra...' ? 'Inter' : selectedFont);
-    const fCategory = category || 'SaaS / Web App';
+    const fFont = data.selectedFont || 'Plus Jakarta Sans'; // Use selected font or default to premium font
 
-    // Dicionário de Tradução Boltfy
-    const translations: Record<string, any> = {
-      'English': {
-        header: 'Boltfy 1.0 AI Master Prompt 🚀',
-        context: 'Context: Create the complete frontend for the application',
-        overview: '1. Overview & Strategy',
-        category: 'Category:',
-        task: 'Main Task:',
-        pain: 'Problem Solved:',
-        audience: 'Target Audience:',
-        stories: '2. User Stories & Requirements',
-        storyItems: [
-          `As a user, I want a modern and intuitive interface for ${projectName}.`,
-          `As a user, I want to easily navigate between ${finalPages}.`,
-          `As an admin, I want the system to solve the problem of ${finalPain}.`
-        ],
-        design: '3. Design Guidelines (High Fidelity)',
-        aesthetics: 'Aesthetics: Modern SaaS, glassmorphism effects, 20px rounded corners, smooth shadows, and high accessibility.',
-        arch: '4. Architecture and Flow (Clickability Guaranteed)',
-        pages: 'Main Screens (Menu):',
-        interactivity: 'Interactivity: Every mentioned element must be a clickable section or screen with state transitions.',
-        impl: '5. Final Implementation Instruction',
-        platform: 'Target Platform:',
-        tech: 'Tech Stack: React, TailwindCSS, Lucide Icons.',
-        colors: {
-          primary: 'Primary Color',
-          secondary: 'Secondary Color',
-          bg: 'Background Color',
-          text: 'Text Color'
-        },
-        footer: 'Generate the complete code. All interactive elements (buttons, links, menu items) MUST be clickable, simulating real navigation or state changes. The user experience must be fluid, premium, and completely interactive.'
-      },
-      'Español': {
-        header: 'Boltfy 1.0 IA Maestro de Prompts 🚀',
-        context: 'Contexto: Crea el frontend completo para la aplicación',
-        overview: '1. Visión General y Estrategia',
-        category: 'Categoría:',
-        task: 'Tarea Principal:',
-        pain: 'Problema Resuelto:',
-        audience: 'Público Objetivo:',
-        stories: '2. Historias de Usuario y Requisitos',
-        storyItems: [
-          `Como usuario, quiero una interfaz moderna e intuitiva para ${projectName}.`,
-          `Como usuario, quiero navegar fácilmente entre ${finalPages}.`,
-          `Como administrador, quiero que el sistema resuelva el problema de ${finalPain}.`
-        ],
-        design: '3. Directrices de Diseño (Alta Fidelidad)',
-        aesthetics: 'Estética: SaaS moderno, efectos de glassmorphism, esquinas redondeadas de 20px, sombras suaves y alta accesibilidad.',
-        arch: '4. Arquitectura y Flujo (Clicabilidad Garantizada)',
-        pages: 'Pantallas Principales (Menú):',
-        interactivity: 'Interactividad: Cada elemento mencionado debe ser una sección o pantalla clicable con transiciones de estado.',
-        impl: '5. Instrucción Final de Implementación',
-        platform: 'Plataforma de Destino:',
-        tech: 'Tech Stack: React, TailwindCSS, Lucide Icons.',
-        colors: {
-          primary: 'Color Primario',
-          secondary: 'Color Secundario',
-          bg: 'Color de Fondo',
-          text: 'Color de Texto'
-        },
-        footer: 'Genera el código completo. Todos los elementos interactivos (botones, enlaces, elementos de menú) DEBEN ser clicables, simulando una navegación real o cambios de estado. La experiencia del usuario debe ser fluida, premium y completamente interactiva.'
-      },
-      'Português (Brasil)': {
-        header: 'Boltfy 1.0 IA Master de Prompts 🚀',
-        context: 'Contexto: Crie o frontend completo para o aplicativo',
-        overview: '1. Visão Geral e Estratégia',
-        category: 'Categoria:',
-        task: 'Tarefa Principal:',
-        pain: 'Problema Resolvido:',
-        audience: 'Público-Alvo:',
-        stories: '2. Histórias de Usuário e Requisitos',
-        storyItems: [
-          `Como usuário, quero uma interface moderna e intuitiva para ${projectName}.`,
-          `Como usuário, quero navegar facilmente entre as telas de ${finalPages}.`,
-          `Como administrador, quero que o sistema resolva a dor de ${finalPain}.`
-        ],
-        design: '3. Diretrizes de Design (Alta Fidelidade)',
-        aesthetics: 'Estética: SaaS moderno, efeitos de glassmorphism, cantos arredondados (20px), sombras suaves e foco em usabilidade.',
-        arch: '4. Estrutura e Fluxo Essencial (Com Clicabilidade Garantida)',
-        pages: 'Telas Principais (Menu):',
-        interactivity: 'Interatividade: Cada item mencionado deve ser uma seção ou tela clicável com transições de estado.',
-        impl: '5. Instrução Final para a IA de Código',
-        platform: 'Plataforma de Destino:',
-        tech: 'Tech Stack: React, TailwindCSS, Lucide Icons.',
-        colors: {
-          primary: 'Cor Primária',
-          secondary: 'Cor Secundária',
-          bg: 'Cor de Fundo',
-          text: 'Cor do Texto'
-        },
-        footer: 'Gere o código completo. Todos os elementos interativos (botões, links, itens de menu) DEVEM ser clicáveis, simulando navegação ou mudança de estado. A experiência do usuário deve ser fluida, prêmium e completamente interativa.'
-      }
-    };
+    // Construção do Prompt Estilo Boltfy Intelligence
+    let prompt = `Boltfy Intelligence Prompts 🚀
 
-    const t = translations[primaryLanguage] || translations['Português (Brasil)'];
+Contexto: Crie o frontend completo para o aplicativo "${projectName}". A tarefa principal do aplicativo é: ${finalTask}. O foco é em interatividade total e design de ponta, resolvendo o seguinte problema principal para o usuário: ${finalPain}. IA de Destino: Este prompt foi otimizado para a plataforma ${selectedDevPlatform}.
 
-    // Construção do Prompt Mestre
-    const prompt = `## ${t.header}
+1. Visão Geral e Conceito Central:
 
-**${t.context} "${projectName}"**
+Nome do Projeto: ${projectName}
 
-### ${t.overview}
-*   **${t.category}** ${fCategory}
-*   **${t.task}** ${finalTask}
-*   **${t.pain}** ${finalPain}
-*   **${t.audience}** ${finalAudience}
+Função Principal (A Grande Tarefa): ${finalTask}
 
-### ${t.stories}
-${t.storyItems.map((item: string) => `*   ${item}`).join('\n')}
+Problema Resolvido (O Maior Benefício/Alívio): ${finalPain}
 
-### ${t.design}
-*   **🎨 ${t.colors.primary}:** \`${fPrimary}\`
-*   **🎨 ${t.colors.secondary}:** \`${fSecondary}\`
-*   **🎨 ${t.colors.bg}:** \`${fBg}\`
-*   **🎨 ${t.colors.text}:** \`${fText}\`
-*   **Tipo de Fonte:** \`${fFont}\`
-*   **${t.aesthetics}**
+2. Público-Alvo e Persona:
 
-### ${t.arch}
-*   **${t.pages}** ${finalPages}.
-*   **${t.interactivity}**
+Usuário Principal (Para quem é o app): ${finalAudience}.`;
 
-### ${t.impl}
-*   **${t.platform}** ${selectedDevPlatform}
-*   **${t.tech}**
-*   **Regra de Ouro:** ${t.footer}`;
+    if (modelData?.dailyUsers) {
+      prompt += `\n\nQuem Vai Usar no Dia a Dia: ${modelData.dailyUsers}`;
+    }
+
+    prompt += `\n\n3. Estrutura e Fluxo Essencial (Com Clicabilidade Garantida):
+
+Telas Principais (Menu): ${finalPages}. Cada item mencionado deve ser uma tela ou seção clicável no menu de navegação.
+
+Autenticação: Se o app gerencia dados de usuários, inclua telas de Login e Cadastro clicáveis.`;
+
+    if (modelData?.features) {
+      prompt += `\n\nFuncionalidades Adicionais (Opcional): ${modelData.features}.`;
+    }
+
+    prompt += `\n\nFuncionalidades Complementares (Sugeridas): - Design 100% Responsivo (com clicabilidade e fluxo simulado).
+
+4. Design e Experiência do Usuário (UI/UX):
+
+Idioma: ${primaryLanguage}
+
+Tipo de Fonte: ${fFont}
+
+Animações: Transições de página suaves (fade-in/slide-in).
+
+Responsividade: Design adaptativo para desktop, tablet e mobile.
+
+Aesthetics: Force o uso de Glassmorphism, Soft Shadows, 8pt Grid System e Micro-interações.
+
+Paleta de Cores (Instruções para a IA):
+
+🎨 Cor Primária (Primary): ${fPrimary}. Use esta cor como a cor principal da marca. Ela deve ser aplicada nos botões de ação principal (CTAs), ícones importantes, links ativos e qualquer elemento que precise guiar o usuário para uma ação importante. É a cor mais proeminente e que define a identidade visual.
+
+🎨 Cor Secundária (Secondary): ${fSecondary}. Use para destacar seções, fundos de cards ou elementos que precisam se diferenciar do fundo principal, mas sem competir com a cor primária. Ela deve complementar a cor primária.
+
+🎨 Cor de Fundo (Background): ${fBg}. Cor de base para o fundo de toda a aplicação.
+
+🎨 Cor do Texto (Foreground): ${fText}. Cor para todos os textos principais e ícones, garantindo um bom contraste com a Cor de Fundo.
+
+🎨 Cores de Feedback Semânticas: Além das cores da marca, implemente um sistema de cores semânticas padrão:
+- Sucesso: Verde vibrante para confirmações.
+- Aviso: Amarelo/Laranja para alertas.
+- Erro: Vermelho para ações destrutivas ou erros.
+- Info: Azul para mensagens informativas.
+
+Detalhes Adicionais de Design: Siga as melhores práticas de design moderno, com cantos arredondados, espaçamento consistente e sombras suaves para criar uma sensação de profundidade.
+
+Instrução Final para a IA de Código: Gere o código completo (HTML, TailwindCSS, e React/Next.js) para este frontend. Todos os elementos interativos (botões, links, itens de menu) DEVEM ser clicáveis, simulando navegação ou mudança de estado. Não use placeholders como "página em construção". A experiência do usuário deve ser fluida e completamente interativa desde o início.`;
 
     setGeneratedPrompt(prompt);
   }, [data]);
@@ -260,7 +335,7 @@ ${t.storyItems.map((item: string) => `*   ${item}`).join('\n')}
             <Terminal className="w-4 h-4 text-wine-400" />
           </div>
           <span className="text-[10px] font-black text-wine-500 tracking-[0.3em] uppercase">
-            {`> BOLTFY 1.0: ESTRATÉGIA MASTER`}
+            {`> BOLTFY: INTELLIGENCE ENGINE`}
           </span>
         </div>
         <div className="px-3 py-1 bg-slate-800/20 rounded-full border border-wine-500/20">
@@ -291,7 +366,7 @@ ${t.storyItems.map((item: string) => `*   ${item}`).join('\n')}
               <div className="w-2.5 h-2.5 rounded-full bg-red-500/40" />
               <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/40" />
               <div className="w-2.5 h-2.5 rounded-full bg-green-500/40" />
-              <span className="text-[10px] font-mono text-wine-400/60 ml-2">boltfy_v1_prompt.md</span>
+              <span className="text-[10px] font-mono text-wine-400/60 ml-2">boltfy_intelligence_prompt.md</span>
             </div>
             <button onClick={handleCopy} className="flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 rounded-lg text-[10px] font-bold text-wine-400 transition-colors">
               {copied ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
