@@ -37,7 +37,13 @@ import {
   Cloud,
   Code,
   ChevronDown,
-  User
+  User,
+  Timer,
+  Flame,
+  IceCream,
+  Star,
+  MapPin,
+  Map
 } from 'lucide-react';
 
 interface CreateAppViewProps {
@@ -51,6 +57,7 @@ type AudienceType = 'Eu (Admin) e Clientes' | 'Apenas Funcionários' | 'Público
 const CreateAppView: React.FC<CreateAppViewProps> = ({ onBack, onFinish }) => {
   const [step, setStep] = useState<'selection' | 'from-zero' | 'templates' | 'customize-template'>('selection');
   const [activeTemplateCategory, setActiveTemplateCategory] = useState('Todos');
+  const [selectedTemplateId, setSelectedTemplateId] = useState('');
 
   // States do Formulário
   const [projectName, setProjectName] = useState('');
@@ -159,6 +166,7 @@ const CreateAppView: React.FC<CreateAppViewProps> = ({ onBack, onFinish }) => {
     setProjectName(template.title);
     setAppDescription(template.description);
     setCategory('Marketing');
+    setSelectedTemplateId(template.id);
 
     // Apply model-specific colors based on template ID
     switch (template.id) {
@@ -313,17 +321,51 @@ const CreateAppView: React.FC<CreateAppViewProps> = ({ onBack, onFinish }) => {
                   <p className="opacity-60 text-sm mb-8 font-medium">Bem-vindo de volta</p>
                   <div className="p-6 rounded-[32px] mb-8 text-white relative overflow-hidden shadow-xl" style={{ background: `linear-gradient(135deg, ${primaryColor}, ${primaryColor}cc)` }}>
                     <div className="relative z-10">
-                      <h2 className="text-xl font-bold mb-1">Bem-estar</h2>
-                      <p className="text-white/80 text-xs font-medium">Sua saúde em primeiro lugar</p>
+                      {['personal-trainer', 'estudio-tatuagem', 'barbearia', 'clinica-medica'].includes(selectedTemplateId) || category === 'Saúde' ? (
+                        <>
+                          <h2 className="text-xl font-bold mb-1">Bem-estar</h2>
+                          <p className="text-white/80 text-xs font-medium">Sua saúde em primeiro lugar</p>
+                        </>
+                      ) : (['cafeteria', 'restaurant-pizzaria', 'hamburgueria-artesanal', 'sushi-japonesa', 'acaiteria-sorveteria', 'confeitaria-doces', 'distribuidora-bebidas'].includes(selectedTemplateId) || category === 'Alimentação') ? (
+                        <>
+                          <h2 className="text-xl font-bold mb-1">Fome de quê?</h2>
+                          <p className="text-white/80 text-xs font-medium">Peça e receba em casa</p>
+                        </>
+                      ) : (
+                        <>
+                          <h2 className="text-xl font-bold mb-1">Destaque</h2>
+                          <p className="text-white/80 text-xs font-medium">Explore as novidades</p>
+                        </>
+                      )}
                     </div>
                     <div className="absolute -right-8 -bottom-8 w-32 h-32 bg-white/20 rounded-full blur-3xl"></div>
                   </div>
                   <div className="space-y-4">
-                    {[
-                      { icon: Stethoscope, label: 'Marcar Consulta' },
-                      { icon: ClipboardList, label: 'Meus Exames' },
-                      { icon: History, label: 'Histórico Médico' }
-                    ].map((item, idx) => (
+                    {(() => {
+                      // Logic for Context Cards
+                      if (['personal-trainer'].includes(selectedTemplateId)) {
+                        return [
+                          { icon: Flame, label: 'Treino do Dia' },
+                          { icon: ClipboardList, label: 'Avaliação Física' },
+                          { icon: Utensils, label: 'Plano Alimentar' },
+                          { icon: Calendar, label: 'Agendar Sessão' }
+                        ];
+                      }
+                      if (['cafeteria', 'acaiteria-sorveteria', 'confeitaria-doces', 'hamburgueria-artesanal', 'sushi-japonesa'].includes(selectedTemplateId)) {
+                        return [
+                          { icon: Utensils, label: 'Cardápio de Sabores' },
+                          { icon: ShoppingBag, label: 'Fazer Pedido' },
+                          { icon: Star, label: 'Meus Pontos' },
+                          { icon: MapPin, label: 'Localizar Loja' }
+                        ];
+                      }
+                      // Default Fallback
+                      return [
+                        { icon: Stethoscope, label: 'Marcar Consulta' },
+                        { icon: ClipboardList, label: 'Meus Exames' },
+                        { icon: History, label: 'Histórico Médico' }
+                      ];
+                    })().map((item, idx) => (
                       <div key={idx} className="flex items-center justify-between p-4 bg-white/50 dark:bg-white/5 backdrop-blur-sm border border-black/5 dark:border-white/5 rounded-2xl transition-all hover:scale-[1.02] active:scale-95 cursor-pointer">
                         <div className="flex items-center gap-4">
                           <div className="p-2.5 bg-white dark:bg-zinc-800 rounded-xl shadow-sm">
