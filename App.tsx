@@ -12,6 +12,7 @@ import IACopyView from './components/IACopyView';
 import SettingsView from './components/SettingsView';
 import HelpView from './components/HelpView';
 import StudyAreaView from './components/StudyAreaView';
+import CourseModulesView from './components/CourseModulesView';
 import UsersView from './components/UsersView';
 import RadarView from './components/RadarView';
 import { supabase } from './src/lib/supabase';
@@ -106,7 +107,9 @@ const App: React.FC = () => {
       case 'ajuda':
         return <HelpView />;
       case 'estudos':
-        return <StudyAreaView />;
+        return <StudyAreaView onNavigateToCourse={() => setActiveTab('course-modules')} />;
+      case 'course-modules':
+        return <CourseModulesView onBack={() => setActiveTab('estudos')} />;
       case 'users':
         return <UsersView />;
       case 'create-app':

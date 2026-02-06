@@ -1,7 +1,20 @@
 import React from 'react';
 import { Users, Play, ExternalLink, Trophy } from 'lucide-react';
 
-const StudyAreaView: React.FC = () => {
+interface StudyAreaViewProps {
+    onNavigateToCourse?: () => void;
+}
+
+const StudyAreaView: React.FC<StudyAreaViewProps> = ({ onNavigateToCourse }) => {
+    // Smooth scroll handler
+    const scrollToModules = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        const modulesSection = document.getElementById('modulos-formacao');
+        if (modulesSection) {
+            modulesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
+
     return (
         <div className="flex flex-col max-w-7xl mx-auto pt-10 pb-20 px-6">
             {/* Header Section */}
@@ -26,7 +39,7 @@ const StudyAreaView: React.FC = () => {
 
                         {/* Title and Description */}
                         <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-                            Formação Vertex: O<br />Novo Mercado de IA
+                            Formação Boltfy: O<br />Novo Mercado de IA
                         </h2>
                         <p className="text-slate-400 text-sm md:text-base leading-relaxed mb-8 max-w-xl">
                             Domine a prática da criação de Apps com Inteligência Artificial. O conteúdo completo já está liberado. Aprenda a criar, vender e escalar seus projetos de software agora mesmo.
@@ -39,7 +52,10 @@ const StudyAreaView: React.FC = () => {
                         </div>
 
                         {/* CTA Button */}
-                        <button className="bg-gradient-to-r from-wine-600 to-wine-700 hover:from-wine-500 hover:to-wine-600 text-white px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-wider flex items-center gap-3 transition-all shadow-lg shadow-wine-900/20 hover:shadow-wine-900/40 hover:scale-[1.02]">
+                        <button
+                            onClick={scrollToModules}
+                            className="bg-gradient-to-r from-wine-600 to-wine-700 hover:from-wine-500 hover:to-wine-600 text-white px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-wider flex items-center gap-3 transition-all shadow-lg shadow-wine-900/20 hover:shadow-wine-900/40 hover:scale-[1.02]"
+                        >
                             ACESSAR ÁREA DE MEMBROS
                             <ExternalLink className="w-4 h-4" />
                         </button>
