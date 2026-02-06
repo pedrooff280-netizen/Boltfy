@@ -264,16 +264,6 @@ const ProspectorView: React.FC = () => {
                 {isSearching ? <Loader2 className="w-4 h-4 animate-spin" /> : <Zap className="w-4 h-4 fill-current" />}
                 {isSearching ? 'Buscando...' : 'Prospectar'}
               </button>
-
-              <button
-                disabled={isSearching}
-                onClick={() => handleSearch(true)}
-                className="bg-slate-800 hover:bg-slate-700 text-slate-300 px-6 py-3 rounded-2xl font-medium text-sm transition-all flex items-center gap-2 border border-white/5"
-                title="Modo Simulação (Para testar o sistema agora)"
-              >
-                <Cpu className="w-4 h-4" />
-                <span>Simular</span>
-              </button>
             </div>
           </div>
         </div>
