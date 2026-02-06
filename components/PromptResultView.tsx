@@ -153,6 +153,14 @@ const BOLTFY_MODELS_DB: Record<string, any> = {
       text: '#F9FAFB',
       font: 'Plus Jakarta Sans'
     }
+  },
+  'Barbearia Premium': {
+    task: 'Permitir que clientes escolham o serviço (corte, barba, combo), selecionem seu barbeiro preferido, visualizem a agenda com horários disponíveis e agendem com um clique. O sistema deve suportar pagamento online (cartão/Pix) como sinal para garantir a reserva, enviar lembretes automáticos via WhatsApp e permitir cancelamento ou reagendamento seguindo as regras da barbearia.',
+    pain: 'Acabar com a confusão de agendamentos manuais, reduzir drasticamente o número de faltas (no-shows) com lembretes e pagamento de sinal, e organizar a agenda de múltiplos profissionais em um painel centralizado, fornecendo relatórios de faturamento, serviços mais populares e desempenho de cada barbeiro. O cliente pode favoritar serviços e ver seu histórico.',
+    audience: 'Donos de barbearias e barbeiros autônomos que estão cansados de gerenciar agendamentos manualmente por WhatsApp e querem profissionalizar o atendimento, reduzir faltas e otimizar a agenda de múltiplos profissionais.',
+    dailyUsers: 'Clientes para agendar e gerenciar seus horários; os barbeiros para consultar e gerenciar suas agendas pessoais, visualizar suas comissões e avaliações; o dono/gerente para ter uma visão geral de todos os agendamentos, gerenciar serviços, profissionais, horários de funcionamento, bloquear horários e analisar relatórios de desempenho da equipe.',
+    pages: 'Agendamento (Serviços > Barbeiro > Horários), Meus Agendamentos (com opção de reagendar/cancelar), Perfil do Cliente (com histórico e serviços favoritos), Perfil do Barbeiro (com portfólio e avaliações), Painel do Barbeiro (agenda e ganhos), Painel do Gerente (visão geral, gestão de serviços, relatórios).',
+    features: 'Design 100% Responsivo (com clicabilidade e fluxo simulado)'
   }
 };
 
@@ -181,6 +189,7 @@ const PromptResultView: React.FC<PromptResultViewProps> = ({ data, onReset, onGo
     const isAcai = projectName?.toLowerCase().includes('açaí') || projectName?.toLowerCase().includes('acai') || appDescription?.toLowerCase().includes('sorveteria');
     const isConfeitaria = projectName?.toLowerCase().includes('confeitaria') || appDescription?.toLowerCase().includes('doces') || appDescription?.toLowerCase().includes('bolo');
     const isDistribuidora = projectName?.toLowerCase().includes('distribuidora') || appDescription?.toLowerCase().includes('bebidas') || appDescription?.toLowerCase().includes('cerveja');
+    const isBarbearia = projectName?.toLowerCase().includes('barbearia') || appDescription?.toLowerCase().includes('barbearia') || appDescription?.toLowerCase().includes('corte');
 
     let modelData = null;
     if (isPizzaria) modelData = BOLTFY_MODELS_DB['Pizzaria Delivery'];
@@ -192,6 +201,7 @@ const PromptResultView: React.FC<PromptResultViewProps> = ({ data, onReset, onGo
     else if (isAcai) modelData = BOLTFY_MODELS_DB['Açaiteria & Sorveteria'];
     else if (isConfeitaria) modelData = BOLTFY_MODELS_DB['Confeitaria & Doces'];
     else if (isDistribuidora) modelData = BOLTFY_MODELS_DB['Distribuidora de Bebidas'];
+    else if (isBarbearia) modelData = BOLTFY_MODELS_DB['Barbearia Premium'];
 
     // Variáveis Finais (Prioriza Modelo -> Se não, usa Formulário)
     const finalTask = modelData?.task || appDescription || 'Oferecer uma experiência fluida e intuitiva para o usuário final.';

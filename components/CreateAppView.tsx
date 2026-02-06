@@ -173,6 +173,9 @@ const CreateAppView: React.FC<CreateAppViewProps> = ({ onBack, onFinish }) => {
       case 'personal-trainer':
         setPrimaryColor('#8A4DFF'); setSecondaryColor('#64748B'); setBgColor('#FFFFFF'); setTextColor('#0F172A'); setSelectedFont('Plus Jakarta Sans');
         break;
+      case 'barbearia':
+        setPrimaryColor('#8000FF'); setSecondaryColor('#1F1F1F'); setBgColor('#171717'); setTextColor('#FFFFFF'); setSelectedFont('Roboto');
+        break;
       case 'hamburgueria-artesanal':
         setPrimaryColor('#D97706'); setSecondaryColor('#78350F'); setBgColor('#1C1917'); setTextColor('#FAFAF9'); setSelectedFont('Plus Jakarta Sans');
         break;
