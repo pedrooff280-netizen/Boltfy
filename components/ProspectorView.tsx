@@ -151,7 +151,6 @@ const ProspectorView: React.FC = () => {
         textQuery: `${niche} em ${location}`,
         fields: ['id', 'displayName', 'formattedAddress', 'rating', 'userRatingCount', 'websiteUri', 'nationalPhoneNumber', 'googleMapsUri', 'location'],
         maxResultCount: 15,
-        languageCode: 'pt-BR',
         rankPreference: SearchByTextRankPreference.RELEVANCE
       };
 
@@ -426,8 +425,8 @@ const ProspectorView: React.FC = () => {
                     loading="lazy"
                     allowFullScreen
                     src={selectedLead.id.startsWith('mock-')
-                      ? `https://www.google.com/maps/embed/v1/place?key=AIzaSyC6H-UuaIw-pglDYo_3ZrgOXx9U2CcGQGk&q=${encodeURIComponent(selectedLead.name + ' ' + selectedLead.address)}`
-                      : `https://www.google.com/maps/embed/v1/place?key=AIzaSyC6H-UuaIw-pglDYo_3ZrgOXx9U2CcGQGk&q=place_id:${selectedLead.id}`
+                      ? `https://www.google.com/maps/embed/v1/place?key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}&q=${encodeURIComponent(selectedLead.name + ' ' + selectedLead.address)}`
+                      : `https://www.google.com/maps/embed/v1/place?key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}&q=place_id:${selectedLead.id}`
                     }
                   />
                   <div className="absolute top-4 left-4">
