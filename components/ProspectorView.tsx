@@ -149,7 +149,7 @@ const ProspectorView: React.FC = () => {
 
       const request = {
         textQuery: `${niche} em ${location}`,
-        fields: ['id', 'displayName', 'formattedAddress', 'rating', 'userRatingCount', 'websiteUri', 'nationalPhoneNumber', 'googleMapsUri', 'location'],
+        fields: ['id', 'displayName', 'formattedAddress', 'rating', 'userRatingCount', 'nationalPhoneNumber', 'location'],
         maxResultCount: 15,
         rankPreference: SearchByTextRankPreference.RELEVANCE
       };
@@ -171,10 +171,10 @@ const ProspectorView: React.FC = () => {
           name: place.displayName?.text || place.displayName || '',
           address: place.formattedAddress || '',
           phone: place.nationalPhoneNumber || 'Sem Telefone',
-          website: place.websiteUri || 'Sem Site',
+          website: place.websiteURI || 'Sem Site',
           rating: place.rating || 'N/A',
           user_ratings_total: place.userRatingCount || 0,
-          maps_url: place.googleMapsUri,
+          maps_url: place.googleMapsURI || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.displayName?.text || place.displayName || '')}`,
           isOpen: null,
           location: {
             lat: place.location?.lat() || 0,
