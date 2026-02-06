@@ -98,6 +98,58 @@ const StudyAreaView: React.FC = () => {
                 </div>
             </div>
 
+            {/* Modules Section - Anchor for smooth scroll */}
+            <div id="modulos-formacao" className="mt-16 scroll-mt-24">
+                <h2 className="text-3xl font-bold text-white mb-8">Módulos Disponíveis</h2>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {/* Module 1 */}
+                    <div className="bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-wine-500/30 transition-all cursor-pointer">
+                        <div className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-3">MÓDULO 1</div>
+                        <h3 className="text-white font-bold text-xl mb-4">Introdução ao Ecossistema</h3>
+                        <div className="flex items-center gap-4 text-slate-400 text-sm">
+                            <div className="flex items-center gap-1">
+                                <Play className="w-3 h-3" />
+                                <span>15 min</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                                <span>📚 2 Aulas</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Module 2 */}
+                    <div className="bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-wine-500/30 transition-all cursor-pointer">
+                        <div className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-3">MÓDULO 2</div>
+                        <h3 className="text-white font-bold text-xl mb-4">Fundamentos Técnicos</h3>
+                        <div className="flex items-center gap-4 text-slate-400 text-sm">
+                            <div className="flex items-center gap-1">
+                                <Play className="w-3 h-3" />
+                                <span>40 min</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                                <span>📚 4 Aulas</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Module 3 */}
+                    <div className="bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-wine-500/30 transition-all cursor-pointer">
+                        <div className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-3">MÓDULO 3</div>
+                        <h3 className="text-white font-bold text-xl mb-4">Mão na Massa</h3>
+                        <div className="flex items-center gap-4 text-slate-400 text-sm">
+                            <div className="flex items-center gap-1">
+                                <Play className="w-3 h-3" />
+                                <span>2h</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                                <span>📚 7 Aulas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* Protocol 8 Days - Full Width */}
             <div className="mt-8 bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-3xl p-8 flex items-center justify-between group hover:border-wine-500/30 transition-all">
                 <div className="flex items-center gap-6">
@@ -112,7 +164,7 @@ const StudyAreaView: React.FC = () => {
                             </div>
                         </div>
                         <p className="text-slate-400 text-sm">
-                            O desafio definitivo. Complete 8 missões práticas e consecutivas para desbloquear seu <span className="text-white font-semibold">Certificado de Especialista Vertex</span>.
+                            O desafio definitivo. Complete 8 missões práticas e consecutivas para desbloquear seu <span className="text-white font-semibold">Certificado de Especialista Boltfy</span>.
                         </p>
                     </div>
                 </div>
