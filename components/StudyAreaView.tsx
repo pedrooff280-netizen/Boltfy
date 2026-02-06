@@ -53,7 +53,7 @@ const StudyAreaView: React.FC<StudyAreaViewProps> = ({ onNavigateToCourse }) => 
 
                         {/* CTA Button */}
                         <button
-                            onClick={scrollToModules}
+                            onClick={onNavigateToCourse}
                             className="bg-gradient-to-r from-wine-600 to-wine-700 hover:from-wine-500 hover:to-wine-600 text-white px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-wider flex items-center gap-3 transition-all shadow-lg shadow-wine-900/20 hover:shadow-wine-900/40 hover:scale-[1.02]"
                         >
                             ACESSAR ÁREA DE MEMBROS
@@ -110,58 +110,6 @@ const StudyAreaView: React.FC<StudyAreaViewProps> = ({ onNavigateToCourse }) => 
                             Assistir no YouTube
                             <ExternalLink className="w-3 h-3" />
                         </button>
-                    </div>
-                </div>
-            </div>
-
-            {/* Modules Section - Anchor for smooth scroll */}
-            <div id="modulos-formacao" className="mt-16 scroll-mt-24">
-                <h2 className="text-3xl font-bold text-white mb-8">Módulos Disponíveis</h2>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {/* Module 1 */}
-                    <div className="bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-wine-500/30 transition-all cursor-pointer">
-                        <div className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-3">MÓDULO 1</div>
-                        <h3 className="text-white font-bold text-xl mb-4">Introdução ao Ecossistema</h3>
-                        <div className="flex items-center gap-4 text-slate-400 text-sm">
-                            <div className="flex items-center gap-1">
-                                <Play className="w-3 h-3" />
-                                <span>15 min</span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                                <span>📚 2 Aulas</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Module 2 */}
-                    <div className="bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-wine-500/30 transition-all cursor-pointer">
-                        <div className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-3">MÓDULO 2</div>
-                        <h3 className="text-white font-bold text-xl mb-4">Fundamentos Técnicos</h3>
-                        <div className="flex items-center gap-4 text-slate-400 text-sm">
-                            <div className="flex items-center gap-1">
-                                <Play className="w-3 h-3" />
-                                <span>40 min</span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                                <span>📚 4 Aulas</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Module 3 */}
-                    <div className="bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-wine-500/30 transition-all cursor-pointer">
-                        <div className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-3">MÓDULO 3</div>
-                        <h3 className="text-white font-bold text-xl mb-4">Mão na Massa</h3>
-                        <div className="flex items-center gap-4 text-slate-400 text-sm">
-                            <div className="flex items-center gap-1">
-                                <Play className="w-3 h-3" />
-                                <span>2h</span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                                <span>📚 7 Aulas</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
