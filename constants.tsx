@@ -21,7 +21,6 @@ export const NAV_ITEMS: NavItem[] = [
   { id: 'iacopy', label: 'IA Copy', icon: Bot, section: 'vendas' },
   { id: 'radar', label: 'Radar', icon: Radar, section: 'vendas' },
   { id: 'estudos', label: 'Área de Estudos', icon: GraduationCap, section: 'suporte' },
-  { id: 'users', label: 'Usuários', icon: Users, section: 'suporte' },
   { id: 'ajuda', label: 'Ajuda', icon: HelpCircle, section: 'suporte' },
 ];
 
