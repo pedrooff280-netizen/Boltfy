@@ -24,10 +24,15 @@ const App: React.FC = () => {
   useEffect(() => {
     console.log("App: Checking initial session...");
     // Check initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      console.log("App: Initial session found:", !!session);
-      setIsAuthenticated(!!session);
-    });
+    supabase.auth.getSession()
+      .then(({ data: { session } }) => {
+        console.log("App: Initial session found:", !!session);
+        setIsAuthenticated(!!session);
+      })
+      .catch((error) => {
+        console.error("App: Error checking initial session:", error);
+        setIsAuthenticated(false); // Move to login if check fails
+      });
 
     // Listen for changes
     const {
