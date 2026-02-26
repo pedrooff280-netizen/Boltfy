@@ -75,10 +75,12 @@ const IACopyView: React.FC<IACopyViewProps> = () => {
         // Simulação de delay para "Glassmorphism" effect
         await new Promise(resolve => setTimeout(resolve, 2000));
 
-        const apiKey = process.env.API_KEY;
+        // 1. Validate if we have a key (even mock)
+        const apiKey = process.env.VITE_GEMINI_API_KEY || '';
 
-        // MOCK MODE: Fallback sem chave
-        if (!apiKey || apiKey === 'PLACEHOLDER_API_KEY') {
+        // MOCK MODE: Fallback if definitely no real key
+        if (!apiKey || apiKey === 'PLACEHOLDER' || apiKey === '') {
+            console.warn("IACopyView: Using mock generation (Missing API Key)");
             const mockScripts = {
                 whatsapp: `Oi ${targetName}, tudo bem? Me chamo ${myData.name}.\n\nAcompanho o trabalho da ${leadData.company} e notei que ${strategy.hook}. \n\nMuitas empresas no segmento de ${leadData.segment}, ao lidarem com isso, acabam enfrentando o desafio de ${strategy.pain}. \n\nNós ajudamos negócios a resolver exatamente essa questão através de ${strategy.solution}, permitindo que alcancem ${strategy.promise}. \n\nFaz sentido conversarmos por 10 minutos para eu entender se nossa abordagem pode ser útil para a ${leadData.company} também?`,
                 instagram: `Fala ${targetName}! 👋 Vi aqui o perfil da ${leadData.company} e notei uma oportunidade em ${strategy.hook}.\n\nSei que isso pode gerar ${strategy.pain}, mas existe um jeito de virar o jogo para ${strategy.promise}.\n\nMe avisa se quiser trocar uma ideia rápida sobre isso!`,
@@ -93,7 +95,8 @@ const IACopyView: React.FC<IACopyViewProps> = () => {
         }
 
         try {
-            const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+            console.log("IACopyView: Initializing Gemini...");
+            const ai = new GoogleGenAI({ apiKey });
             const prompt = `Aja como um Engenheiro de Vendas e Copywriter Expert.
             Crie um "Protocolo de Conversão" completo com 4 scripts distintos baseados nesta estratégia.
 
@@ -134,9 +137,9 @@ const IACopyView: React.FC<IACopyViewProps> = () => {
 
             setShowResult(true);
 
-        } catch (error) {
-            console.error("Erro ao gerar copy:", error);
-            // Fallback erro
+        } catch (error: any) {
+            console.error("IACopyView: Error generating copy:", error);
+            alert(`Falha na IA: ${error.message || 'Erro desconhecido'}. Verifique sua conexão ou chave de API.`);
         } finally {
             setIsGenerating(false);
         }

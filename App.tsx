@@ -14,40 +14,56 @@ import HelpView from './components/HelpView';
 import StudyAreaView from './components/StudyAreaView';
 import CourseModulesView from './components/CourseModulesView';
 import RadarView from './components/RadarView';
+import ErrorToast from './components/ErrorToast';
 import { supabase } from './src/lib/supabase';
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null); // Null for initial loading
   const [activeTab, setActiveTab] = useState('dashboard');
   const [projectData, setProjectData] = useState<any>(null);
-
-  useEffect(() => {
-    console.log("App: Checking initial session...");
-    // Check initial session
-    supabase.auth.getSession()
-      .then(({ data: { session } }) => {
-        console.log("App: Initial session found:", !!session);
-        setIsAuthenticated(!!session);
-      })
-      .catch((error) => {
-        console.error("App: Error checking initial session:", error);
-        setIsAuthenticated(false); // Move to login if check fails
-      });
-
-    // Listen for changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      console.log("App: Auth state change:", !!session);
-      setIsAuthenticated(!!session);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
+  const [error, setError] = useState<string | null>(null);
 
   const [projects, setProjects] = useState<any[]>([]);
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
+
+  useEffect(() => {
+    let mounted = true;
+    console.log("App: Initializing auth...");
+
+    // 1. Initial manual check
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (mounted) {
+        console.log("App: Session check complete", !!session);
+        setIsAuthenticated(!!session);
+        setIsInitialLoading(false);
+      }
+    }).catch(err => {
+      console.error("App: Session check failed", err);
+      if (mounted) {
+        setIsAuthenticated(false);
+        setIsInitialLoading(false);
+      }
+    });
+
+    // 2. Auth state subscription
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (mounted) {
+        console.log(`App: Auth State Change [${event}]`, !!session);
+        // Debounce if needed, but for now simple check
+        setIsAuthenticated(!!session);
+      }
+    });
+
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
+  }, []);
 
   const fetchProjects = async () => {
+    if (!isAuthenticated) return;
+
+    console.log("App: Fetching projects...");
     try {
       const { data, error } = await supabase
         .from('projects')
@@ -57,15 +73,16 @@ const App: React.FC = () => {
       if (error) throw error;
       if (data) setProjects(data);
     } catch (error) {
-      console.error('Erro ao buscar projetos:', error);
+      console.error('App: Error fetching projects:', error);
     }
   };
 
+  // Only fetch initial projects once per login
   useEffect(() => {
     if (isAuthenticated) {
       fetchProjects();
     }
-  }, [isAuthenticated, activeTab]); // Refresh when tab changes (to see new projects from IACopy)
+  }, [isAuthenticated]);
 
   const handleFinishProject = (data: any) => {
     setProjectData(data);
@@ -135,7 +152,7 @@ const App: React.FC = () => {
   };
 
   // Show loading state or login
-  if (isAuthenticated === null) {
+  if (isInitialLoading) {
     return <div className="min-h-screen bg-black flex items-center justify-center text-wine-500">
       <div className="w-8 h-8 border-4 border-wine-500/30 border-t-wine-500 rounded-full animate-spin" />
     </div>;
@@ -159,6 +176,14 @@ const App: React.FC = () => {
           {renderContent()}
         </div>
       </main>
+
+      {/* Notificações Globais */}
+      {error && (
+        <ErrorToast
+          message={error}
+          onClose={() => setError(null)}
+        />
+      )}
 
       {/* Acentos de fundo decorativos */}
       <div className="fixed top-0 right-0 w-[500px] h-[500px] bg-wine-600/5 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none z-0" />

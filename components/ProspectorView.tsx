@@ -138,12 +138,17 @@ const ProspectorView: React.FC = () => {
     const safetyTimeout = setTimeout(() => {
       if (isSearching) {
         setIsSearching(false);
-        alert("O Google não respondeu (Timeout). Verifique se o seu projeto tem um Cartão de Crédito válido no Faturamento do Google Cloud!");
+        console.warn("ProspectorView: Google API Timeout");
+        alert("O Google não respondeu. Verifique sua conexão e se a API do Google Maps está configurada corretamente.");
       }
-    }, 25000);
+    }, 15000); // reduced to 15s for better UX
 
     try {
-      console.log(">>> [STP 1] Carregando Biblioteca Places v3...");
+      if (!window.google || !window.google.maps) {
+        throw new Error("SDK do Google Maps não carregado. Verifique sua conexão.");
+      }
+
+      console.log("ProspectorView: Loading Places library...");
       const { Place, SearchByTextRankPreference } = await window.google.maps.importLibrary("places") as any;
       console.log(">>> [STP 2] Biblioteca carregada.");
 
